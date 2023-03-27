@@ -32,7 +32,9 @@ export const Register = () => {
       alert('registration failed');
     }
   }
-  if (redirect) <Navigate to={redirect} />;
+  if (redirect) {
+    return <Navigate to={redirect} />;
+  }
 
   return (
     <div className="head main_container">
