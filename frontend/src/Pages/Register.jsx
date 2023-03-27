@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 export const Register = () => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [redirect, setRedirect] = useState('');
 
   const onUserNameChangeHandler = (event) => {
     setUserName(event.target.value);
@@ -15,15 +17,22 @@ export const Register = () => {
     setUserPassword(event.target.value);
   };
 
-  const onSingUpHandler = async (event) => {
+  async function onSingUpHandler(event) {
     event.preventDefault();
 
-    await fetch('http://localhost:4000/register', {
+    const response = await fetch('http://localhost:4000/register', {
       method: 'POST',
       body: JSON.stringify({ userName, userEmail, userPassword }),
       headers: { 'Content-Type': 'application/json' },
     });
-  };
+    if (response.status === 200) {
+      alert('registration successful');
+      setRedirect('/login');
+    } else {
+      alert('registration failed');
+    }
+  }
+  if (redirect) <Navigate to={redirect} />;
 
   return (
     <div className="head main_container">
