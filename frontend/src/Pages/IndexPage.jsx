@@ -3,7 +3,7 @@ import { BlogPost } from './BlogPost';
 
 export const IndexPage = () => {
   return (
-    <div>
+    <div className="main_container">
       <BlogPost />
       <BlogPost />
       <BlogPost />

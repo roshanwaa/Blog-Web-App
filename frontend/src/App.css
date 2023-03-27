@@ -8,34 +8,7 @@ main {
   padding: 10px;
   max-width: 1080px;
   margin: 0 auto;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
-  margin-top: 20px;
-  align-items: center;
-}
-
-header a {
-  font-family: 'Raleway', sans-serif;
-  color: inherit;
-  font-weight: 500;
-}
-
-header .header_logo {
-  display: flex;
-  align-items: center;
-}
-header .logo {
-  width: auto;
-  height: 2.3rem;
-}
-
-header nav {
-  display: flex;
-  gap: 15px;
+  width: fit-content;
 }
 
 div.post {

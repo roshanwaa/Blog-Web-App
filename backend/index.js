@@ -1,9 +1,18 @@
-const express = require('express');
+const express = new require('express');
+var cors = require('cors');
+
 const app = express();
 const port = 4000;
-app.get('/test', (req, res) => {
-  res.json(200, 'test Ok');
+
+app.use(cors());
+app.use(express.json());
+
+app.post('/register', (req, res) => {
+  const { userName, userEmail,  userPassword } = req.body;
+
+  res.json({
+    requestData: { userName, userEmail, userPassword },
+  });
 });
 
-app.post('/register', (req, res) => {});
 app.listen(port);

@@ -5,7 +5,7 @@ import { BsFacebook, BsGoogle } from 'react-icons/bs';
 
 export const Login = () => {
   return (
-    <div className="head">
+    <div className="head main_container">
       <main className="main">
         <div className="container">
           <section className="wrapper">
