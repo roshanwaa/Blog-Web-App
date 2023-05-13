@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/CSS/loginPage.css';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';
 
 export const Login = () => {
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [redirectUrl, setRedirectUrl] = useState('');
+  async function userLogin(ev) {
+    ev.preventDefault();
+
+    await fetch('http://localhost:4000/login', {
+      method: 'POST',
+      body: JSON.stringify({ userEmail, userPassword }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   return (
     <div className="head main_container">
       <main className="main">
@@ -20,7 +33,7 @@ export const Login = () => {
                 </span>
               </p>
             </div>
-            <form name="" className="form">
+            <form name="" className="form" onSubmit={userLogin}>
               <div className="input-control">
                 <label htmlFor="email" className="input-label" hidden>
                   Email Address
@@ -31,6 +44,8 @@ export const Login = () => {
                   id="email"
                   className="input-field"
                   placeholder="Email Address"
+                  value={userEmail}
+                  onChange={(ev) => setUserEmail(ev.target.value)}
                 />
               </div>
               <div className="input-control">
@@ -43,6 +58,8 @@ export const Login = () => {
                   id="password"
                   className="input-field"
                   placeholder="Password"
+                  value={userPassword}
+                  onChange={(ev) => setUserPassword(ev.target.value)}
                 />
               </div>
               <div className="input-control">
