@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import '../assets/CSS/loginPage.css';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';
 
@@ -7,16 +7,27 @@ export const Login = () => {
   // const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [redirectUrl, setRedirectUrl] = useState('');
+  const [redirectUrl, setRedirectUrl] = useState(false);
 
   async function userLogin(ev) {
     ev.preventDefault();
 
-    await fetch('http://localhost:4000/login', {
+    const response = await fetch('http://localhost:4000/login', {
       method: 'POST',
       body: JSON.stringify({ userEmail, userPassword }),
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
     });
+    if (response.ok) {
+      alert('Login Successful');
+      setRedirectUrl(true);
+    } else {
+      alert('Login Failed');
+    }
+  }
+
+  if (redirectUrl) {
+    return <Navigate to={'/'} />;
   }
 
   return (

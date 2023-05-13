@@ -13,7 +13,7 @@ const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
 const salt = bcrypt.genSaltSync(10);
-app.use(cors());
+app.use(cors({ credentials: true, origin: 'http://127.0.0.1:5174' }));
 app.use(express.json());
 
 // mongoose.connect(process.env.MONGO_URL, {
@@ -55,7 +55,7 @@ app.post('/login', async (req, res) => {
     jwt.sign({ userEmail, id: userDoc._id }, token, {}, (err, resToken) => {
       if (err) throw err;
 
-      res.json(resToken);
+      res.cookie('token', resToken).json('Ok');
     });
   } else {
     res.status(400).json('Wrong password!');
