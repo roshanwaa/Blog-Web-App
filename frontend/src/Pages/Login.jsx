@@ -4,9 +4,11 @@ import '../assets/CSS/loginPage.css';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';
 
 export const Login = () => {
+  // const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [redirectUrl, setRedirectUrl] = useState('');
+
   async function userLogin(ev) {
     ev.preventDefault();
 

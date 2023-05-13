@@ -4,9 +4,13 @@ const cors = require('cors');
 const User = require('./Models/User');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
+var jwt = require('jsonwebtoken');
 
 const app = express();
 const port = 4000;
+
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
 const salt = bcrypt.genSaltSync(10);
 app.use(cors());
@@ -17,7 +21,6 @@ app.use(express.json());
 //   useUnifiedTopology: true,
 // });
 
-// mongoose.connect();
 mongoose.Promise = global.Promise;
 mongoose.connect(
   'mongodb+srv://MrSmokeDB:TH5TgnJfvABSICBC@blogappcluster.rrgcuhi.mongodb.net/?retryWrites=true&w=majority',
@@ -43,10 +46,20 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { userName, userEmail, userPassword } = req.body;
+  const { userEmail, userPassword } = req.body;
 
-  const userDoc = await User.findOne({ userName });
-  res.json(userDoc);
+  const userDoc = await User.findOne({ userEmail });
+  const passOk = bcrypt.compareSync(userPassword, userDoc.userPassword);
+
+  if (passOk) {
+    jwt.sign({ userEmail, id: userDoc._id }, token, {}, (err, resToken) => {
+      if (err) throw err;
+
+      res.json(resToken);
+    });
+  } else {
+    res.status(400).json('Wrong password!');
+  }
 });
 
 app.listen(port);
