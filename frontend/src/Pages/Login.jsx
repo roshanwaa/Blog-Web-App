@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import '../assets/CSS/loginPage.css';
 import { BsFacebook, BsGoogle } from 'react-icons/bs';
+import { UserContext } from './UserContext';
 
 export const Login = () => {
   // const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [redirectUrl, setRedirectUrl] = useState(false);
+
+  const { setUserInfo } = useContext(UserContext);
 
   async function userLogin(ev) {
     ev.preventDefault();
@@ -19,8 +22,11 @@ export const Login = () => {
       credentials: 'include',
     });
     if (response.ok) {
-      alert('Login Successful');
-      setRedirectUrl(true);
+      response.json().then((usrInfo) => {
+        setUserInfo(usrInfo);
+        setRedirectUrl(true);
+      });
+      // alert('Login Successful');
     } else {
       alert('Login Failed');
     }

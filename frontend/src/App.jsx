@@ -4,16 +4,19 @@ import { Login } from './Pages/Login';
 import { Layout } from './Components/Layout';
 import { IndexPage } from './Pages/IndexPage';
 import { Register } from './Pages/Register';
+import { USerContextProvider } from './Pages/UserContext';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<IndexPage />} />
-        <Route path={'/login'} element={<Login />} />
-        <Route path={'/register'} element={<Register />} />
-      </Route>
-    </Routes>
+    <USerContextProvider>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<IndexPage />} />
+          <Route path={'/login'} element={<Login />} />
+          <Route path={'/register'} element={<Register />} />
+        </Route>
+      </Routes>
+    </USerContextProvider>
   );
 }
 

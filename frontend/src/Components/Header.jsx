@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { FaNewspaper } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { TfiWrite } from 'react-icons/tfi';
@@ -6,18 +6,21 @@ import { RiUser6Line, RiUserAddLine } from 'react-icons/ri';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 import '../assets/CSS/Header.css';
+import { UserContext } from '../Pages/UserContext';
 
 export const Header = () => {
   const lastScrollTop = useRef(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [userName, setUserName] = useState(null);
+  // const [userName, setUserName] = useState(null);
+
+  const { setUserInfo, userInfo } = useContext(UserContext);
 
   useEffect(() => {
     fetch('http://localhost:4000/profile', {
       credentials: 'include',
     })
       .then((response) => response.json())
-      .then((usrInfo) => setUserName(usrInfo.userEmail));
+      .then((usrInfo) => setUserInfo(usrInfo));
   }, []);
 
   useEffect(() => {
@@ -44,7 +47,11 @@ export const Header = () => {
       method: 'POST',
       credentials: 'include',
     });
+    setUserInfo(null);
   };
+
+  // const userName = userInfo?.userName;
+  const userName = userInfo;
 
   return (
     <>
