@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FaNewspaper } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { TfiWrite } from 'react-icons/tfi';
+import { RiUser6Line, RiUserAddLine } from 'react-icons/ri';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 import '../assets/CSS/Header.css';
@@ -68,9 +69,11 @@ export const Header = () => {
           {!userName && (
             <>
               <Link to="/login" className="nav_link" href="">
+                <RiUser6Line />
                 Login
               </Link>
               <Link to="/register" className="nav_link" href="">
+                <RiUserAddLine />
                 Register
               </Link>
             </>

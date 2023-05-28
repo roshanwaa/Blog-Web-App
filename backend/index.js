@@ -11,9 +11,9 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = 4000;
 
-// const secretToken = process.env.SECRET_TOKEN;
-const secretToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJhdWQiOiIxMzQiLCJleHAiOjE1MDMwNTk5OTksImlzcyI6Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDYvaWRlbnRpdHkiLCJpc3MiOiJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI.S_XxuS_fThOG1Rsi77YOb_oR7-Wg-9uX3rJcFIG25vA';
+const secretToken = process.env.SECRET_TOKEN;
+// const secretToken =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJhdWQiOiIxMzQiLCJleHAiOjE1MDMwNTk5OTksImlzcyI6Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDYvaWRlbnRpdHkiLCJpc3MiOiJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI.S_XxuS_fThOG1Rsi77YOb_oR7-Wg-9uX3rJcFIG25vA';
 
 const salt = bcrypt.genSaltSync(10);
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
