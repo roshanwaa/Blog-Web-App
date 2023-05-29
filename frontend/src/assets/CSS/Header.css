@@ -27,7 +27,7 @@ nav {
 .nav-items {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
 }
 
 .nav-items a {
