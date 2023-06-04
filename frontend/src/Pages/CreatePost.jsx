@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from '../assets/CSS/createPost.module.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export const CreatePost = () => {
+  const [value, setValue] = useState('');
   return (
     <div className="main_container">
       <form action="">
@@ -20,8 +23,22 @@ export const CreatePost = () => {
           placeholder="Summary"
           className={`${classes.styledInput} ${classes.wide}`}
         />
-        <input type="file" className={`${classes.file}`} />
-        <textarea name="Blog" id="blog" cols="30" rows="10"></textarea>
+        <div className={`${classes.file}`}>
+          <input type="file" className={classes.input_file} />
+          <label
+            tabIndex="0"
+            htmlFor="my-file"
+            className={classes.input_file_trigger}>
+            Select a file...
+          </label>
+        </div>
+
+        <ReactQuill
+          theme="snow"
+          value={value}
+          onChange={setValue}
+          className="reactQuill"
+        />
       </form>
     </div>
   );
