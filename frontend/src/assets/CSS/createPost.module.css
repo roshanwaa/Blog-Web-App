@@ -33,11 +33,61 @@ input:valid ~ input::placeholder {
   color: #267c6b;
 }
 
+.custom_btn {
+  margin: 1rem 0;
+  border-radius: 1rem;
+  padding: 20px;
+  border: 0;
+  font-size: 1rem;
+  background-color: #d4d0d079;
+  color: #000000;
+  width: -webkit-fill-available;
+  height: 40px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+/* 16 */
+.btn16 {
+  border: none;
+  color: #000;
+}
+.btn16:after {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+.btn16:hover {
+  color: #000;
+}
+.btn16:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+.btn16:active {
+  top: 2px;
+}
+
 .styledInput,
 .file {
   width: -webkit-fill-available;
   margin: 1rem 0;
-  border-radius: 12px;
+  border-radius: 1rem;
   padding: 30px;
   border: 0;
   font-size: 1rem;

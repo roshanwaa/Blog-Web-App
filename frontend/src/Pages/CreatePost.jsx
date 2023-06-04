@@ -39,6 +39,9 @@ export const CreatePost = () => {
           onChange={setValue}
           className="reactQuill"
         />
+        <button className={`${classes.custom_btn} ${classes.btn16} `}>
+          Read More
+        </button>
       </form>
     </div>
   );
