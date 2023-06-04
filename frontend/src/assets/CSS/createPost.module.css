@@ -30,13 +30,13 @@ input:valid ~ input::placeholder {
 .input_file_trigger:hover,
 .input_file_trigger:focus {
   background: #34495e;
-  color: #267c6b;
+  color: #f6f7f6;
 }
 
 .custom_btn {
   margin: 1rem 0;
-  border-radius: 1rem;
-  padding: 20px;
+  border-radius: 1.5rem;
+  padding: 15px;
   border: 0;
   font-size: 1rem;
   background-color: #d4d0d079;
@@ -59,6 +59,7 @@ input:valid ~ input::placeholder {
   color: #000;
 }
 .btn16:after {
+  border-radius: 1.5rem;
   position: absolute;
   content: '';
   width: 0;
@@ -83,8 +84,11 @@ input:valid ~ input::placeholder {
   top: 2px;
 }
 
-.styledInput,
 .file {
+  margin: 1.5rem 0;
+}
+
+.styledInput {
   width: -webkit-fill-available;
   margin: 1rem 0;
   border-radius: 1rem;
