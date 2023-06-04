@@ -31,7 +31,9 @@ const formats = [
   'image',
 ];
 export const CreatePost = () => {
-  const [value, setValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [summary, setSummary] = useState('');
+  const [content, setContent] = useState('');
 
   return (
     <div className="main_container">
@@ -41,6 +43,8 @@ export const CreatePost = () => {
           name="title"
           id="postTitle"
           placeholder="Title"
+          value={title}
+          onChange={(ev) => setTitle(ev.target.value)}
           className={`${classes.styledInput} ${classes.wide}`}
           required
         />
@@ -49,6 +53,8 @@ export const CreatePost = () => {
           name="summary"
           id="postSummary"
           placeholder="Summary"
+          value={summary}
+          onChange={(ev) => setSummary(ev.target.value)}
           className={`${classes.styledInput} ${classes.wide}`}
         />
         <div className={`${classes.file}`}>
@@ -63,11 +69,11 @@ export const CreatePost = () => {
 
         <ReactQuill
           theme="snow"
-          value={value}
-          onChange={setValue}
           className="reactQuill"
           modules={modules}
           formats={formats}
+          value={content}
+          onChange={(newValue) => setContent(newValue)}
         />
         <button className={`${classes.custom_btn} ${classes.btn16} `}>
           Read More
