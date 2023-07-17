@@ -3,10 +3,16 @@ const { mongoose } = require('mongoose');
 const cors = require('cors');
 const User = require('./Models/User');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
 const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+
+const newLocal = 'uploads/';
+const upload = multer({ dest: newLocal });
+
+// const uploadMIddleWare = multer({ dest: newLocal });
 
 const app = express();
 const port = 4000;
@@ -84,6 +90,10 @@ app.get('/profile', (req, res) => {
 
 app.post('/signOut', (req, res) => {
   res.cookie('token', '').json('Ok');
+});
+
+app.post('/myPost', upload.single('file'), (req, res) => {
+  res.json(req.file);
 });
 
 app.listen(port);

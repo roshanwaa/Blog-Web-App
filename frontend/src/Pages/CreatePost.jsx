@@ -1,7 +1,9 @@
+import { MDBFile } from 'mdb-react-ui-kit';
 import React, { useState } from 'react';
-import classes from '../assets/CSS/createPost.module.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import classes from '../assets/CSS/createPost.module.css';
+
 const modules = {
   toolbar: [
     [{ header: [1, 2, false] }],
@@ -30,14 +32,32 @@ const formats = [
   'link',
   'image',
 ];
+
 export const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [content, setContent] = useState('');
+  const [files, setFiles] = useState('');
+
+  const createNewPost = async (ev) => {
+    const data = new FormData(ev.currentTarget);
+    data.append('title', title);
+    data.append('summary', summary);
+    data.append('content', content);
+    data.append('file', files[0]);
+    ev.preventDefault();
+
+    const response = await fetch('http://localhost:4000/myPost', {
+      method: 'POST',
+      body: data,
+    });
+    // response.json();
+    console.log(await response.json());
+  };
 
   return (
     <div className="main_container">
-      <form action="">
+      <form action="" onSubmit={createNewPost}>
         <input
           type="title"
           name="title"
@@ -58,13 +78,13 @@ export const CreatePost = () => {
           className={`${classes.styledInput} ${classes.wide}`}
         />
         <div className={`${classes.file}`}>
-          <input type="file" className={classes.input_file} />
-          <label
-            tabIndex="0"
-            htmlFor="my_File"
-            className={classes.input_file_trigger}>
-            Select a file...
-          </label>
+          <MDBFile
+            id="customFile"
+            type="file"
+            name="file"
+            value={files}
+            onChange={(ev) => setFiles(ev.target.value)}
+          />
         </div>
 
         <ReactQuill
