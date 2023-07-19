@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import classes from '../assets/CSS/createPost.module.css';
+import { Navigate } from 'react-router-dom';
 
 const modules = {
   toolbar: [
@@ -38,6 +39,7 @@ export const CreatePost = () => {
   const [summary, setSummary] = useState('');
   const [content, setContent] = useState('');
   const [files, setFiles] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
   const createNewPost = async (ev) => {
     const data = new FormData(ev.currentTarget);
@@ -51,9 +53,15 @@ export const CreatePost = () => {
       method: 'POST',
       body: data,
     });
-    response.json();
+    if (response.ok) {
+      setRedirect(true);
+    }
     // console.log(await response.json());
   };
+
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="main_container">
