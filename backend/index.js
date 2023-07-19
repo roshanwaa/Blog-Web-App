@@ -5,6 +5,7 @@ const User = require('./Models/User');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
 
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
@@ -93,7 +94,13 @@ app.post('/signOut', (req, res) => {
 });
 
 app.post('/myPost', upload.single('file'), (req, res) => {
-  res.json(req.file);
+  const { originalname, path } = req.file;
+  const partsName = originalname.split('.');
+  const extension = partsName[partsName.length - 1];
+  const newFileName = path + '.' + extension;
+  fs.renameSync(path, newFileName);
+
+  res.json('OK');
 });
 
 app.listen(port);

@@ -51,8 +51,8 @@ export const CreatePost = () => {
       method: 'POST',
       body: data,
     });
-    // response.json();
-    console.log(await response.json());
+    response.json();
+    // console.log(await response.json());
   };
 
   return (
