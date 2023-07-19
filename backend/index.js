@@ -2,6 +2,7 @@ const express = new require('express');
 const { mongoose } = require('mongoose');
 const cors = require('cors');
 const User = require('./Models/User');
+const Post = require('./Models/Post');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const cookieParser = require('cookie-parser');
@@ -93,14 +94,22 @@ app.post('/signOut', (req, res) => {
   res.cookie('token', '').json('Ok');
 });
 
-app.post('/myPost', upload.single('file'), (req, res) => {
+app.post('/post', upload.single('file'), async (req, res) => {
   const { originalname, path } = req.file;
   const partsName = originalname.split('.');
-  const extension = partsName[partsName.length - 1];
-  const newFileName = path + '.' + extension;
+  const ext = partsName[partsName.length - 1];
+  const newFileName = path + '.' + ext;
   fs.renameSync(path, newFileName);
 
-  res.json('OK');
+  const { title, summary, content } = req.body;
+  const postDoc = await Post.create({
+    title: title,
+    summary: summary,
+    content: content,
+    cover: newFileName,
+  });
+
+  res.json(postDoc);
 });
 
 app.listen(port);

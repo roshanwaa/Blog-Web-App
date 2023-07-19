@@ -47,7 +47,7 @@ export const CreatePost = () => {
     data.append('file', files[0]);
     ev.preventDefault();
 
-    const response = await fetch('http://localhost:4000/myPost', {
+    const response = await fetch('http://localhost:4000/post', {
       method: 'POST',
       body: data,
     });
@@ -59,8 +59,8 @@ export const CreatePost = () => {
     <div className="main_container">
       <form action="" onSubmit={createNewPost}>
         <input
-          type="title"
-          name="title"
+          type="name"
+          name="name"
           id="postTitle"
           placeholder="Title"
           value={title}
@@ -69,8 +69,8 @@ export const CreatePost = () => {
           required
         />
         <input
-          type="summary"
-          name="summary"
+          type="name"
+          name="name"
           id="postSummary"
           placeholder="Summary"
           value={summary}
