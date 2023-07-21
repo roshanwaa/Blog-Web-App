@@ -48,10 +48,11 @@ export const CreatePost = () => {
     data.append('content', content);
     data.append('file', files[0]);
     ev.preventDefault();
-
+    // "cascadia code" , Consolas, 'Courier New', monospace
     const response = await fetch('http://localhost:4000/post', {
       method: 'POST',
       body: data,
+      credentials: 'include',
     });
     if (response.ok) {
       setRedirect(true);

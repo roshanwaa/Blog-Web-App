@@ -27,6 +27,7 @@ const salt = bcrypt.genSaltSync(10);
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // mongoose.connect(process.env.MONGO_URL, {
 //   useNewUrlParser: true,
@@ -101,15 +102,28 @@ app.post('/post', upload.single('file'), async (req, res) => {
   const newFileName = path + '.' + ext;
   fs.renameSync(path, newFileName);
 
-  const { title, summary, content } = req.body;
-  const postDoc = await Post.create({
-    title: title,
-    summary: summary,
-    content: content,
-    cover: newFileName,
-  });
+  const { token } = req.cookies;
+  jwt.verify(token, secretToken, {}, async (err, info) => {
+    if (err) throw err;
 
-  res.json(postDoc);
+    const { title, summary, content, author } = req.body;
+    const postDoc = await Post.create({
+      title: title,
+      summary: summary,
+      content: content,
+      cover: newFileName,
+      author: info.id,
+    });
+    res.json(postDoc);
+  });
+});
+
+app.get('/post', async (req, res) => {
+  const blogPost = await Post.find()
+    .populate('author', ['userName'])
+    .sort({ createdAt: -1 })
+    .limit(20);
+  res.json(blogPost);
 });
 
 app.listen(port);

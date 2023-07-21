@@ -18,24 +18,39 @@ div.post {
 }
 
 div.post div.text_Content h1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
   margin: 0;
   font-size: 2rem;
+}
+
+div.post div.text_Content h5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 
 div.post p.content_info {
   margin: 6px 0;
   font-size: 0.9rem;
-  color: #555555;
+  color: #746f6f;
   font-weight: bold;
   display: flex;
   gap: 10px;
 }
 
 div.post p.content_info a.content_author {
-  color: #333;
+  color: #4f552d;
 }
 
 div.post p.content_summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
   margin: 6px 0;
   line-height: 1.5rem;
 }
