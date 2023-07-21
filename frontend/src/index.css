@@ -5,6 +5,11 @@ a {
   color: #000000;
 }
 
+a:hover {
+  color: var(--mdb-teal);
+  text-decoration: none;
+}
+
 body {
   background-color: #f8f6f4;
   transition: all 0.3s ease;

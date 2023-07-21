@@ -1,6 +1,11 @@
 a {
-  color: inherit;
+  color: black;
 }
+a:hover {
+  color: var(--mdb-body-color);
+  text-decoration: none;
+}
+
 img {
   width: 100%;
 }
