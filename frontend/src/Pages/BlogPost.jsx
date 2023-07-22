@@ -2,6 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 export const BlogPost = ({
+  _id,
   title,
   summary,
   content,
@@ -13,12 +14,12 @@ export const BlogPost = ({
     <>
       <div className="post">
         <div className="content_img">
-          <Link to={'/post/id'}>
+          <Link to={`/post/${_id}`}>
             <img src={'http://localhost:4000/' + cover} alt="" />
           </Link>
         </div>
         <div className="text_Content">
-          <Link to={'/post/id'}>
+          <Link to={'/post/' + _id}>
             <h1>{title}</h1>
             <h5>{summary}</h5>
           </Link>
