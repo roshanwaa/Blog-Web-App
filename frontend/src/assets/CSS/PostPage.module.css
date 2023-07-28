@@ -1,0 +1,32 @@
+.postImage {
+  width: -webkit-fill-available;
+  max-height: 400px;
+  overflow: hidden;
+}
+.postImage img {
+  object-fit: cover;
+  object-position: center;
+}
+.postHeading {
+  text-align: left;
+}
+.postContent a {
+  color: var(--mdb-link-color);
+  text-decoration: underline;
+}
+.postUserInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.postUserInfo time {
+  color: gray;
+}
+.content_summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  margin: 6px 0;
+  line-height: 1.5rem;
+}

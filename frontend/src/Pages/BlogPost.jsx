@@ -1,6 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import classes from '../assets/CSS/PostPage.module.css';
 export const BlogPost = ({
   _id,
   title,
@@ -29,9 +30,13 @@ export const BlogPost = ({
             </a>
             <time>{format(new Date(createdAt), 'MMM d, yyyy HH:mm')}</time>
           </p>
-          <p className="content_summary">{content}</p>
+
+          <div
+            className={classes.content_summary}
+            dangerouslySetInnerHTML={{ __html: content }}></div>
         </div>
       </div>
+      <hr />
     </>
   );
 };

@@ -26,6 +26,7 @@ code {
     monospace;
 }
 .main_container {
+  margin: 0 12px;
   padding-top: 80px;
 }
 
