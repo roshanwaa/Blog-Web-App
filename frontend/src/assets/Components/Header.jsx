@@ -5,8 +5,8 @@ import { TfiWrite } from 'react-icons/tfi';
 import { RiUser6Line, RiUserAddLine } from 'react-icons/ri';
 import { FaSignOutAlt } from 'react-icons/fa';
 
-import '../assets/CSS/Header.css';
-import { UserContext } from '../Pages/UserContext';
+import '../CSS/Header.css';
+import { UserContext } from '../../Pages/UserContext';
 
 export const Header = () => {
   const lastScrollTop = useRef(0);

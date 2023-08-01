@@ -1,12 +1,12 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './Pages/Login';
-import { Layout } from './Components/Layout';
+import { Layout } from './assets/Components/Layout';
 import { IndexPage } from './Pages/IndexPage';
 import { Register } from './Pages/Register';
 import { USerContextProvider } from './Pages/UserContext';
 import { CreatePost } from './Pages/CreatePost';
-import { PostPages } from './Components/PostPages';
+import { PostPages } from './assets/Components/PostPages';
 
 function App() {
   return (

@@ -17,7 +17,7 @@ export const IndexPage = () => {
     <div className="main_container">
       {blogPost.length > 0 &&
         blogPost.map((post) => {
-          return <BlogPost {...post} />;
+          return <BlogPost {...post} key={post._id} />;
         })}
     </div>
   );

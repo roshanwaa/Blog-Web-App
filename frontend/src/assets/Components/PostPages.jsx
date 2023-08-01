@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import classes from '../assets/CSS/PostPage.module.css';
+import { Link, useParams } from 'react-router-dom';
+import classes from '../CSS/PostPage.module.css';
 import { format } from 'date-fns';
-import { UserContext } from '../Pages/UserContext';
+import { UserContext } from '../../Pages/UserContext';
 import { MdEditDocument } from 'react-icons/md';
 
 export const PostPages = () => {
@@ -27,9 +27,9 @@ export const PostPages = () => {
       <div className={classes.postUserInfo}>
         <div className={classes.author_Section}>
           <h4>by @{postInfo.author.userName}</h4>
-          <a href="" className={classes.editDoc}>
+          <Link to={`/edit/${postInfo._id}`} className={classes.editDoc}>
             <MdEditDocument />
-          </a>
+          </Link>
         </div>
 
         <br />
