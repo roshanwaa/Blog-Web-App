@@ -14,6 +14,9 @@
   color: var(--mdb-link-color);
   text-decoration: underline;
 }
+.postContent p {
+  line-height: 1.5rem;
+}
 .postUserInfo {
   display: flex;
   align-items: center;
@@ -21,6 +24,14 @@
 }
 .postUserInfo time {
   color: gray;
+}
+.author_Section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.editDoc {
+  font-size: 1.5rem;
 }
 .content_summary {
   display: -webkit-box;

@@ -19,7 +19,7 @@ div.post {
   margin: 12px 0;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
   div.post {
     grid-template-columns: 0.9fr 1.1fr;
   }

@@ -26,7 +26,7 @@ export const BlogPost = ({
           </Link>
           <p className="content_info">
             <a href="" className="content_author">
-              {author.userName}
+              @{author.userName}
             </a>
             <time>{format(new Date(createdAt), 'MMM d, yyyy HH:mm')}</time>
           </p>

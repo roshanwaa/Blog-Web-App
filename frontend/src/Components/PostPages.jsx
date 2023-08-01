@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classes from '../assets/CSS/PostPage.module.css';
-import { format, formatISO9075 } from 'date-fns';
+import { format } from 'date-fns';
+import { UserContext } from '../Pages/UserContext';
+import { MdEditDocument } from 'react-icons/md';
+
 export const PostPages = () => {
   const [postInfo, setPostInfo] = useState(null);
+  const { userInfo } = useContext(UserContext);
   const pageID = useParams().id;
 
   useEffect(() => {
@@ -21,7 +25,13 @@ export const PostPages = () => {
     <div className="main_container">
       <h1 className={classes.postHeading}>{postInfo.title}</h1>
       <div className={classes.postUserInfo}>
-        <h4>by {postInfo.author.userName}</h4>
+        <div className={classes.author_Section}>
+          <h4>by @{postInfo.author.userName}</h4>
+          <a href="" className={classes.editDoc}>
+            <MdEditDocument />
+          </a>
+        </div>
+
         <br />
         <time className="">
           {format(new Date(postInfo.createdAt), 'MMM d, yyyy HH:mm')}
@@ -32,7 +42,7 @@ export const PostPages = () => {
       </div>
       <div
         className={classes.postContent}
-        dangerouslySetInnerHTML={{ __html: postInfo.content }}></div>{' '}
+        dangerouslySetInnerHTML={{ __html: postInfo.content }}></div>
       <hr />
     </div>
   );
