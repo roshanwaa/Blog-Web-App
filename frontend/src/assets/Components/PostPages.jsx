@@ -27,7 +27,7 @@ export const PostPages = () => {
       <div className={classes.postUserInfo}>
         <div className={classes.author_Section}>
           <h4>by @{postInfo.author.userName}</h4>
-          <Link to={`/edit/${postInfo._id}`} className={classes.editDoc}>
+          <Link to={`/edit-post/${postInfo._id}`} className={classes.editDoc}>
             <MdEditDocument />
           </Link>
         </div>

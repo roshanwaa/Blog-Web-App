@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import classes from '../assets/CSS/createPost.module.css';
 import { Navigate } from 'react-router-dom';
+import { Editor } from '../assets/Components/Editor';
 
 const modules = {
   toolbar: [
@@ -96,16 +97,18 @@ export const CreatePost = () => {
           />
         </div>
 
-        <ReactQuill
+        {/* <ReactQuill
           theme="snow"
           className="reactQuill"
           modules={modules}
           formats={formats}
           value={content}
           onChange={(newValue) => setContent(newValue)}
-        />
+        /> */}
+
+        <Editor onChange={setContent} value={content} />
         <button className={`${classes.custom_btn} ${classes.btn16} `}>
-          Read More
+          Post
         </button>
       </form>
     </div>

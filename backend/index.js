@@ -19,9 +19,9 @@ const upload = multer({ dest: newLocal });
 const app = express();
 const port = 4000;
 
-const secretToken = process.env.SECRET_TOKEN;
-// const secretToken =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJhdWQiOiIxMzQiLCJleHAiOjE1MDMwNTk5OTksImlzcyI6Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDYvaWRlbnRpdHkiLCJpc3MiOiJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI.S_XxuS_fThOG1Rsi77YOb_oR7-Wg-9uX3rJcFIG25vA';
+// const secretToken = process.env.SECRET_TOKEN;
+const secretToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJhdWQiOiIxMzQiLCJleHAiOjE1MDMwNTk5OTksImlzcyI6Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDYvaWRlbnRpdHkiLCJpc3MiOiJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI.S_XxuS_fThOG1Rsi77YOb_oR7-Wg-9uX3rJcFIG25vA';
 
 const salt = bcrypt.genSaltSync(10);
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
@@ -86,7 +86,7 @@ app.get('/profile', (req, res) => {
   const { token } = req.cookies;
 
   jwt.verify(token, secretToken, {}, (err, info) => {
-    if (err) throw err;
+    if (err) return res.status(401).json({ error: 'Invalid token' });
     res.json(info);
   });
 });
@@ -104,7 +104,9 @@ app.post('/post', upload.single('file'), async (req, res) => {
 
   const { token } = req.cookies;
   jwt.verify(token, secretToken, {}, async (err, info) => {
-    if (err) throw err;
+    if (err) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
 
     const { title, summary, content, author } = req.body;
     const postDoc = await Post.create({
@@ -132,4 +134,40 @@ app.get('/post/:id', async (req, res) => {
   res.json(postDoc);
 });
 
-app.listen(port);
+app.put('/post', upload.single('file'), async (req, res) => {
+  let newFileName = null;
+  if (req.file) {
+    const { originalname, path } = req.file;
+    const partsName = originalname.split('.');
+    const ext = partsName[partsName.length - 1];
+    newFileName = path + '.' + ext;
+    fs.renameSync(path, newFileName);
+  }
+
+  const { token } = req.cookies;
+  jwt.verify(token, secretToken, {}, async (err, info) => {
+    if (err) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    const { id, title, summary, content } = req.body;
+    const postDoc = await Post.findById(id);
+    const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+    if (!isAuthor) {
+      return res.status(400).json('Your are note author');
+    }
+
+    // Update the fields and then save the document
+    postDoc.title = title;
+    postDoc.summary = summary;
+    postDoc.content = content;
+    postDoc.cover = newFileName ? newFileName : postDoc.cover;
+    await postDoc.save();
+
+    res.json(postDoc);
+  });
+});
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
